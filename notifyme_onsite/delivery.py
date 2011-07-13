@@ -5,10 +5,9 @@ from notifyme_onsite.models import OnsiteNotice
 
 class OnsiteStickyBackend(BaseDeliveryBackend):
     identifier = 'onsite_sticky'
+    supports_anonymous_users = True
 
     def deliver_to(self, user, context, notice, language):
-        from pprint import pprint
-        pprint(context)
         expires_at = notice.options.get('expires_at', None)
         body_html = render_to_string(
             (
@@ -19,6 +18,7 @@ class OnsiteStickyBackend(BaseDeliveryBackend):
         )
         OnsiteNotice(
             user=user,
+            language=language,
             expires_at=expires_at,
             notice_type=notice.identifier,
             sticky_body_html=body_html,

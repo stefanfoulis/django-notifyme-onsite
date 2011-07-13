@@ -1,6 +1,7 @@
 #-*- coding: utf-8 -*-
 from django.db import models
 from django.contrib.auth.models import User
+from django.conf import settings
 import notifyme.notice
 
 class OnsiteNotice(models.Model):
@@ -13,7 +14,7 @@ class OnsiteNotice(models.Model):
     """
     created_at = models.DateTimeField(auto_now_add=True)
     notice_type = models.CharField(max_length=255, choices=notifyme.notice.types.items())
-    user = models.ForeignKey(User)
+    language = models.CharField(max_length=32, choices=settings.LANGUAGES, default=settings.LANGUAGES[0][0])
+    user = models.ForeignKey(User, null=True, blank=True)
     expires_at = models.DateTimeField(null=True, blank=True)
-    was_dismissed = models.BooleanField(default=False)
     sticky_body_html = models.TextField(default='')
