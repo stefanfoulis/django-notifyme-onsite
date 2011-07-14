@@ -2,10 +2,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
-import notifyme.notice
 
 
-class OnsiteNotice(models.Model):
+class OnsiteNotification(models.Model):
     """
     Represents a sticky notice for a user. E.g a "growl-style" notice that stays (over multiple requests) visible until
     it is dismissed by the user or it expires.
@@ -14,7 +13,7 @@ class OnsiteNotice(models.Model):
     a is_sticky boolean and a seperate body_html for displaying in a timeline.
     """
     created_at = models.DateTimeField(auto_now_add=True)
-    notice_type = models.CharField(max_length=255)
+    notification_type = models.CharField(max_length=255)
     language = models.CharField(max_length=32, choices=settings.LANGUAGES, default=settings.LANGUAGES[0][0])
     user = models.ForeignKey(User, null=True, blank=True)
     expires_at = models.DateTimeField(null=True, blank=True)
