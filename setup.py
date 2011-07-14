@@ -16,7 +16,7 @@ setup(
     url='http://github.com/stefanfoulis/django-notifyme-onsite',
     license='BSD',
     platforms=['OS Independent'],
-    description="A notification framework for django",
+    description="An on site delivery backend for django-notifyme",
     long_description=read('README.rst'),
     author='Stefan Foulis',
     author_email='stefan.foulis@gmail.com',
